@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import DataCardsList from './components/DataCardsList'
+import {Routes, Route} from 'react-router-dom'
 
 type pokeDatas={
   name: string
@@ -32,7 +33,11 @@ function App() {
 
   return (
     <Box className="App" w={"100%"} bgColor="#040406" color={"#d9d9d9"}>
-      <DataCardsList datas={datas}></DataCardsList>
+      <Routes>
+        <Route path='/detail/:name'></Route>
+        <Route path='/' element={<DataCardsList datas={datas}></DataCardsList>}></Route>
+      </Routes>
+      
     </Box>
   )
 }
