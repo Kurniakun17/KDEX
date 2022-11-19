@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap');
+
+*{
+    font-family: "baloo 2", sans-serif;
+    animation: fade-in 1.25s;
+}
+
+@keyframes fade-in{
+    0% {
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}

@@ -6,11 +6,11 @@ import Home from './pages/Home'
 
 function App() {
   return (
-    <Box className="App" minH="100vh" w={"100%"} bgColor="#040406" color={"#d9d9d9"}>
+    <Box className="App" minH="100vh" w={"100%"} bgColor="#040406" color={"#d9d9d9"} >
       <header>
         <Navbar></Navbar>
       </header>
-      <main>
+      <main style={{padding:"12px"}}>
         <Routes>
           <Route path='/detailed/:name' element={<DetailedPoke/>}></Route>
           <Route path='/' element={<Home></Home>}></Route>

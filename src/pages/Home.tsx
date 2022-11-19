@@ -1,4 +1,4 @@
-import { Box, Center } from '@chakra-ui/react'
+import { Box, Center, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import DataCardsList from '../components/DataCardsList'
 
@@ -64,6 +64,7 @@ export default function Home() {
 
     return (
         <Box>
+            <Heading>Pokédex</Heading>
             <DataCardsList datas={pokemons}></DataCardsList>
         </Box>
     )

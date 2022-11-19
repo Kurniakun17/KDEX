@@ -1,16 +1,15 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
-
-
+import { upperCase } from '../utils'
 
 type DataProps={
-	name:string|undefined
+	name:string
 	abilities:{
 		ability:{
 			name:string
 		}
 	}[]|undefined
-	sprites:string|undefined
+	sprites:string
 }
 
 export default function DetailedCard({name, abilities, sprites}:DataProps) {
@@ -20,7 +19,7 @@ export default function DetailedCard({name, abilities, sprites}:DataProps) {
                 <img src={sprites} alt="" />
             </Box>
             <Box>
-                <Heading display={"block"}>{name}</Heading>
+                <Heading display={"block"}>{upperCase(name)}</Heading>
             </Box>
             <Box display={"block"}>
                 <Text size={"md"} fontWeight="500">Abilities : {abilities?.map((element, index)=><span key={`${name}-${element.ability.name}`}>{element.ability.name}, </span>)}</Text>
