@@ -2,61 +2,67 @@ import { Box, Center, Heading } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import DataCardsList from '../components/DataCardsList'
 
-type pokeDatas={
+type pokeDatas = {
     name: string
     url: string
 }[]
 
-type PokeData={
-	name:string
-	abilities:{
-		ability:{
-			name:string
-		}
-	}[]
-	sprites:{
-		other:{
-			home:{
-				front_default:string
-			}
-		}
-	}
+type PokeData = {
+    name: string
+    abilities: {
+        ability: {
+            name: string
+        }
+    }[]
+    sprites: {
+        other: {
+            home: {
+                front_default: string
+            }
+        }
+    }
+    id: number
+    types: {
+        type: {
+            name: string
+        }
+    }[]
 }[]
 
 export default function Home() {
-    const [nextUrl, setNextUrl] = useState<string|null>(null);
-    const [prevtUrl, setPrevtUrl] = useState<string|null>(null);
-    const [pokemons, setPokemons] = useState([]);
+    const [nextUrl, setNextUrl] = useState<string | null>(null);
+    const [prevtUrl, setPrevtUrl] = useState<string | null>(null);
+    const [pokemons, setPokemons] = useState<PokeData>([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchPoke(){
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0').then((res)=>res.json())
-        .then((res)=>{
-            setNextUrl(res.next)
-            setPrevtUrl(res.previous)
-            getPoke(res.results);
-            setLoading(false)
-        }).catch((error)=>{
-            console.log(error);
-        })
-    }
-
-    const getPoke=async(datas:pokeDatas)=>{
-        datas.map(async(data)=>{
-            fetch(data.url).then((res)=>res.json())
-            .then((res)=>{
-                setPokemons((state)=>{
-                    return [...state, res]
-                })
+    async function fetchPoke() {
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0').then((res) => res.json())
+            .then((res) => {
+                setNextUrl(res.next)
+                setPrevtUrl(res.previous)
+                getPoke(res.results);
+                setLoading(false)
+            }).catch((error) => {
+                console.log(error);
             })
+    }
+
+    const getPoke = async (datas: pokeDatas) => {
+        datas.map(async (data) => {
+            fetch(data.url).then((res) => res.json())
+                .then((res) => {
+                    setPokemons((prevState) => {
+                        return [...prevState, res]
+                    })
+                })
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchPoke();
-    },[]);
+    }, []);
 
-    if(pokemons.length<30){
+    if (pokemons.length < 30) {
         return <h1>Kosong!</h1>
     }
 
