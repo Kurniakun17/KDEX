@@ -16,6 +16,7 @@ function App() {
 
   useEffect(()=>{
     fetchPoke('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0');
+    console.log("triggered")
   },[])
   
   async function fetchPoke(url: string) {

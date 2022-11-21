@@ -17,7 +17,7 @@ type DataCardProps = {
 export default function DataCard({ name, number, sprite, types }: DataCardProps) {
     return (
         <BubblyLink to={`/detailed/${name}`} colorStart={`${bgColor[types[0].type.name as keyof typeof bgColor]}`} colorEnd="#linear-gradient(90deg, rgba(111,103,252,1) 0%, rgba(43,82,78,1) 0%, rgba(35,97,110,1) 100%)">
-            <Box m={"10px 0px"} shadow={"xl"} bgColor={`${bgColor[types[0].type.name as keyof typeof bgColor]}`} minH={"50px"} borderRadius="10px" color={"#fff"} p="10px">
+            <Box m={"10px 0px"} shadow={"xl"} bgColor={`${bgColor[types[0].type.name as keyof typeof bgColor]}`} minH={"50px"} borderRadius="10px" color={"#fff"} p="10px" border={"2px #fff solid"}>
                 <Text fontWeight={"medium"}>#{number < 10 ? "00" : "0"}{number}</Text>
                 <Center>
                     <Flex flexDir={"column"}  bgImg={bgImg.bug} bgPos="1000px 30px" bgRepeat={"no-repeat"}>

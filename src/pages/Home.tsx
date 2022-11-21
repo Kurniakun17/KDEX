@@ -4,9 +4,9 @@ import ReactPaginate from 'react-paginate'
 import DataCardsList from '../components/DataCardsList'
 
 type PokeDatasProps = {
-    PokeDatas:{
-        name:string
-        url:string
+    PokeDatas: {
+        name: string
+        url: string
     }[]
 }
 
@@ -32,33 +32,26 @@ type PokeData = {
     }[]
 }[]
 
-export default function Home({PokeDatas}:PokeDatasProps) {
+export default function Home({ PokeDatas }: PokeDatasProps) {
+    const [PokeSource, setPokeSource] = useState(PokeDatas)
     const [pokemons, setPokemons] = useState<PokeData>([]);
     const [loading, setLoading] = useState(true);
     const [offset, setOffset] = useState(0);
+    const [value, setValue] = useState("");
+    const [pageCount, setPageCount] = useState(Math.ceil(PokeDatas.length/30))
+
     const itemlength = 30;
 
-    let pageCount, state;
+    let state;
 
     useEffect(() => {
-        let data = PokeDatas.slice(offset,offset+itemlength)
+        let data = PokeSource.slice(offset, offset + itemlength);
         getPoke(data);
         setLoading(false);
     }, []);
 
-
-    async function fetchPoke(url: string) {
-        fetch(url).then((res) => res.json())
-            .then((res) => {
-                getPoke(res.results);
-                setLoading(false)
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-
-    const getPoke = async (datas:{name:string, url:string}[]) => {
-        console.log(datas);
+    const getPoke = async (datas: { name: string, url: string }[]) => {
+        setPokemons([]);
         datas.map(async (data) => {
             fetch(data.url).then((res) => res.json())
                 .then((res) => {
@@ -71,31 +64,45 @@ export default function Home({PokeDatas}:PokeDatasProps) {
         })
     }
 
-    const handlePageClick=(event:{selected:number})=>{
-        setPokemons([]);
-        const offset=event.selected*30;
-        getPoke(PokeDatas.slice(offset, offset+itemlength))
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value)
+        let filteredPoke = PokeDatas.filter((data) => { 
+            return data.name.includes(e.target.value.toLowerCase())
+        })
+        setPokeSource(filteredPoke)
+        setPageCount(Math.ceil(filteredPoke.length/30))
+        getPoke(filteredPoke.slice(offset, offset+ itemlength))
+    }
+
+    const handlePageClick = (event: { selected: number }) => {
+        const offset = event.selected * 30;
+        getPoke(PokeSource.slice(offset, offset + itemlength))
+        console.log(event.selected);
     }
 
     if (loading) {
-        return <Center><h1>Loading...</h1></Center>
+        return <Center><h1>Loading. . .</h1></Center>
     }
 
-    pageCount=Math.ceil(1154/30)
-
     return (
-            <Center>
-                <Flex flexDir={"column"} w="100%">
-                    <Input></Input>
-                    <Heading>Pokédex</Heading>
+        <Center>
+            <Flex flexDir={"column"} w="100%">
+                <Box mb="40px">
+                    <Input value={value} onChange={onInputChange}></Input>
+                </Box>
+                <Heading>Pokédex</Heading>
+                {pokemons.length === 0?<Center>
+                        <Heading>Not found . . .</Heading>
+                    </Center>:
+                <>
                     <DataCardsList datas={pokemons}></DataCardsList>
                     <Center>
-                        <Box bgColor={"#FFF"} borderRadius={"10px"}>
+                        <Box bgColor={"#FFF"} borderRadius={"10px"} m="20px" p="10px">
                             <Center>
                                 <ReactPaginate className='paginate'
                                     breakLabel="..."
                                     nextLabel="Next >"
-                                    onPageChange={(e)=>(handlePageClick(e))}
+                                    onPageChange={(e) => (handlePageClick(e))}
                                     pageRangeDisplayed={3}
                                     pageCount={pageCount}
                                     previousLabel="< Previous"
@@ -103,7 +110,9 @@ export default function Home({PokeDatas}:PokeDatasProps) {
                             </Center>
                         </Box>
                     </Center>
-                </Flex>
-            </Center>
+                </>
+                }
+            </Flex>
+        </Center>
     )
 }
