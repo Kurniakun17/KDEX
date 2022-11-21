@@ -6,7 +6,7 @@ export const bgColor={
     "ghost" : "rgb(112,85,155)",
     "steel" : "rgb(183,185,208)",
     "water" : "rgb(100,147,235)",
-    "grass" : "rgb(116,203,72)",
+    "grass" : "rgb(64,176,136)",
     "psychic" : "rgb(251,82,132)",
     "ice":"rgb(154,214,223)",
     "dark" : "rgb(117,87,56)",
@@ -50,6 +50,6 @@ export const theme = extendTheme({
     },
 })
 
-export function upperCase(x:string|undefined){
+export function upperCase(x:string){
     return x[0].toUpperCase() + x?.substring(1)
 }

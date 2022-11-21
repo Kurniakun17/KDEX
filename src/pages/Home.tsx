@@ -1,11 +1,14 @@
-import { Box, Center, Heading } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { Box, Center, Flex, Heading, Input } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import DataCardsList from '../components/DataCardsList'
 
-type pokeDatas = {
-    name: string
-    url: string
-}[]
+type PokeDatasProps = {
+    PokeDatas:{
+        name:string
+        url:string
+    }[]
+}
 
 type PokeData = {
     name: string
@@ -29,49 +32,78 @@ type PokeData = {
     }[]
 }[]
 
-export default function Home() {
-    const [nextUrl, setNextUrl] = useState<string | null>(null);
-    const [prevtUrl, setPrevtUrl] = useState<string | null>(null);
+export default function Home({PokeDatas}:PokeDatasProps) {
     const [pokemons, setPokemons] = useState<PokeData>([]);
     const [loading, setLoading] = useState(true);
+    const [offset, setOffset] = useState(0);
+    const itemlength = 30;
 
-    async function fetchPoke() {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0').then((res) => res.json())
+    let pageCount, state;
+
+    useEffect(() => {
+        let data = PokeDatas.slice(offset,offset+itemlength)
+        getPoke(data);
+        setLoading(false);
+    }, []);
+
+
+    async function fetchPoke(url: string) {
+        fetch(url).then((res) => res.json())
             .then((res) => {
-                setNextUrl(res.next)
-                setPrevtUrl(res.previous)
                 getPoke(res.results);
                 setLoading(false)
             }).catch((error) => {
                 console.log(error);
             })
-    }
+        }
 
-    const getPoke = async (datas: pokeDatas) => {
+    const getPoke = async (datas:{name:string, url:string}[]) => {
+        console.log(datas);
         datas.map(async (data) => {
             fetch(data.url).then((res) => res.json())
                 .then((res) => {
                     setPokemons((prevState) => {
-                        return [...prevState, res]
+                        state = [...prevState, res]
+                        state.sort((a, b) => a.id > b.id ? 1 : -1)
+                        return state;
                     })
                 })
         })
     }
 
-    useEffect(() => {
-        fetchPoke();
-    }, []);
-
-    if (pokemons.length < 30) {
-        return <h1>Kosong!</h1>
+    const handlePageClick=(event:{selected:number})=>{
+        setPokemons([]);
+        const offset=event.selected*30;
+        getPoke(PokeDatas.slice(offset, offset+itemlength))
     }
 
-    console.log(pokemons)
+    if (loading) {
+        return <Center><h1>Loading...</h1></Center>
+    }
+
+    pageCount=Math.ceil(1154/30)
 
     return (
-        <Box>
-            <Heading>Pokédex</Heading>
-            <DataCardsList datas={pokemons}></DataCardsList>
-        </Box>
+            <Center>
+                <Flex flexDir={"column"} w="100%">
+                    <Input></Input>
+                    <Heading>Pokédex</Heading>
+                    <DataCardsList datas={pokemons}></DataCardsList>
+                    <Center>
+                        <Box bgColor={"#FFF"} borderRadius={"10px"}>
+                            <Center>
+                                <ReactPaginate className='paginate'
+                                    breakLabel="..."
+                                    nextLabel="Next >"
+                                    onPageChange={(e)=>(handlePageClick(e))}
+                                    pageRangeDisplayed={3}
+                                    pageCount={pageCount}
+                                    previousLabel="< Previous"
+                                />
+                            </Center>
+                        </Box>
+                    </Center>
+                </Flex>
+            </Center>
     )
 }

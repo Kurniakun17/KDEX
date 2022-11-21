@@ -29,7 +29,7 @@ type DataCardsListProps = {
 export default function DataCardsList({ datas }: DataCardsListProps) {
   return (
     <Center className="fade">
-      <Grid gridTemplateColumns={"repeat(5,1fr)"} w={"80%"} gap={"10px"}>
+      <Grid gridTemplateColumns={["repeat(1,1fr)","repeat(3,1fr)","repeat(4,1fr)","repeat(5,1fr)","repeat(6,1fr)"]} w={"80%"} gap={"10px"}>
         {datas.map((data, index) => {
           return <DataCard key={index} number={data.id} name={data.name} sprite={data.sprites.other.home.front_default} types={data.types}></DataCard>;
         })}

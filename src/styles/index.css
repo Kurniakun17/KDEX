@@ -2,7 +2,18 @@
 
 *{
     font-family: "baloo 2", sans-serif;
-    animation: fade-in 1.25s;
+    animation: fade-in 1.5s;
+}
+
+
+.paginate li{
+    font-size: small;
+    display: inline;
+    margin: 0px 0.3rem;
+    color: black;
+}
+.paginate :first-child, .paginate :last-child{
+    margin-left: 15px;
 }
 
 @keyframes fade-in{
@@ -12,5 +23,11 @@
 
     100%{
         opacity: 1;
+    }
+}
+
+@media screen and (max-width:400px){
+    .paginate li{
+        display: block;
     }
 }
