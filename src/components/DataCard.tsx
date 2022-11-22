@@ -2,6 +2,7 @@ import { Box, Center, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import {BubblyLink} from 'react-bubbly-transitions'
 import { bgColor, bgImg, upperCase } from '../utils/index'
+import TypesCard from './TypesCard'
 
 type DataCardProps = {
     name: string
@@ -27,12 +28,7 @@ export default function DataCard({ name, number, sprite, types }: DataCardProps)
                         <Heading fontSize={"1.5rem"} textAlign="center" fontWeight={"medium"}>{upperCase(name)}</Heading>
                         <Center>
                             <Flex justifyContent={"space-between"} m="0.2rem" gap="0.4rem">
-                                {types.map((type, index) => {
-                                    upperCase(type.type.name);
-                                    return (<Box key={`${index}-${name}"`} borderRadius={"5px"} bgColor="white" color={`${bgColor[types[0].type.name as keyof typeof bgColor]}`}>
-                                        <Text p={"4px 7px"} fontSize="0.8rem" fontWeight={"sm"}>{upperCase(type.type.name)}</Text>
-                                    </Box>);
-                                })}
+                                <TypesCard types={types}></TypesCard>
                             </Flex>
                         </Center>
                     </Flex>
