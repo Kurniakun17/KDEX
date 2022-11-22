@@ -1,29 +1,52 @@
 import React from 'react'
-import { Tabs, TabPanels, TabPanel, Text, Flex, Box } from '@chakra-ui/react'
+import { Tabs, TabPanels, TabPanel, Text, Flex, Box, Center, Heading } from '@chakra-ui/react'
 import DetailedNavbar from './DetailedNavbar'
 import { Progress } from '@chakra-ui/react'
+import TypesCard from './TypesCard'
 
-type DetailedTabsProps={
-    stats:{
-        base_stat:number
+type DetailedTabsProps = {
+    stats: {
+        base_stat: number
+    }[]
+    abilities: {
+        ability: {
+            name: string
+        }
+    }[]
+    weight: number
+    types: {
+        type: {
+            name: string
+        }
     }[]
 }
 
-export default function DetailedTabs({stats}:DetailedTabsProps) {
+export default function DetailedTabs({ stats, abilities, weight, types }: DetailedTabsProps) {
     return (
         <>
             <Tabs>
                 <DetailedNavbar></DetailedNavbar>
                 <TabPanels>
                     <TabPanel textAlign={"left"}>
-                        <Flex flexDir="column" justifyContent={"flex-start"} fontWeight="semibold" gap={"10px"}>
+                        <Flex flexDir="column" justifyContent={"flex-start"} gap={"10px"} fontSize={"lg"}>
+                            <Box>
+                                <Text size={"md"} >Abilities : {abilities.map((element) => <span key={`${name}-${element.ability.name}`}>{element.ability.name}, </span>)}</Text>
+                                <Text>Weight : {weight} kg</Text>
+                                <Flex alignItems={"center"}>
+                                    <Text >Types :</Text>
+                                    <TypesCard types={types}></TypesCard>
+                                </Flex>
+                            </Box>
+                            <Center>
+                                <Heading size={"lg"}>Stats</Heading>
+                            </Center>
                             <Box>
                                 <Text>HP</Text>
-                                <Progress value={stats[0].base_stat} borderRadius={"10px"} max={255}></Progress>
+                                <Progress value={stats[0].base_stat} borderRadius={"10px"} max={255} ></Progress>
                             </Box>
                             <Box>
                                 <Text>Attack</Text>
-                                <Progress value={stats[1].base_stat}  borderRadius={"10px"} max={255}></Progress>
+                                <Progress value={stats[1].base_stat} borderRadius={"10px"} max={255}></Progress>
                             </Box>
                             <Box>
                                 <Text>Defense</Text>
@@ -44,7 +67,7 @@ export default function DetailedTabs({stats}:DetailedTabsProps) {
                         </Flex>
                     </TabPanel>
                     <TabPanel>
-                        <Text>Halo</Text>
+                        
                     </TabPanel>
                 </TabPanels>
             </Tabs>

@@ -5,7 +5,7 @@ export default function DetailedNavbar() {
   return (
     <TabList>
         <Tab>About</Tab>
-        <Tab>Level</Tab>
+        <Tab>Moves</Tab>
     </TabList>
   )
 }

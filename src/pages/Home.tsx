@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import DataCardsList from '../components/DataCardsList'
-import Axios from 'axios'
+import Axios from 'Axios';
 
 type PokeDatasProps = {
     PokeDatas: {
@@ -12,7 +12,7 @@ type PokeDatasProps = {
     }[]
 }
 
-type PokeData = {
+type PokeDataProps = {
     name: string
     abilities: {
         ability: {
@@ -35,7 +35,7 @@ type PokeData = {
 }[]
 
 export default function Home({ PokeDatas }: PokeDatasProps) {
-    const [pokemons, setPokemons] = useState<PokeData>([]);
+    const [pokemons, setPokemons] = useState<PokeDataProps>([]);
     const [loading, setLoading] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
     const [value, setValue] = useState(searchParams.get("search") || "");
@@ -52,7 +52,6 @@ export default function Home({ PokeDatas }: PokeDatasProps) {
         setLoading(true);
         let datas = PokeSource.slice(currentPage * itemlength, currentPage * itemlength + itemlength)
         getPoke(datas);
-        console.log(currentPage)
         setLoading(false);
         return () => { return; }
     }, [value, currentPage]);
