@@ -1,7 +1,9 @@
 import { Box, Center, Flex, Heading, Input } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import DataCardsList from '../components/DataCardsList'
+import Axios from 'axios'
 
 type PokeDatasProps = {
     PokeDatas: {
@@ -33,27 +35,32 @@ type PokeData = {
 }[]
 
 export default function Home({ PokeDatas }: PokeDatasProps) {
-    const [PokeSource, setPokeSource] = useState(PokeDatas)
     const [pokemons, setPokemons] = useState<PokeData>([]);
     const [loading, setLoading] = useState(true);
-    const [offset, setOffset] = useState(0);
-    const [value, setValue] = useState("");
-    const [pageCount, setPageCount] = useState(Math.ceil(PokeDatas.length/30))
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [value, setValue] = useState(searchParams.get("search") || "");
+    const [currentPage, setCurrentPage] = useState(0);
+    const [pageCount, setPageCount] = useState(Math.ceil(PokeDatas.length / 30))
+    const [PokeSource, setPokeSource] = useState(()=>{
+        return value? PokeDatas.filter((data)=>data.name.includes(value.toLowerCase())):PokeDatas
+    });
+    
     const itemlength = 30;
-
     let state;
 
     useEffect(() => {
-        let data = PokeSource.slice(offset, offset + itemlength);
-        getPoke(data);
+        setLoading(true);
+        let datas = PokeSource.slice(currentPage * itemlength, currentPage * itemlength + itemlength)
+        getPoke(datas);
+        console.log(currentPage)
         setLoading(false);
-    }, []);
+        return () => { return; }
+    }, [value, currentPage]);
 
-    const getPoke = async (datas: { name: string, url: string }[]) => {
+    const getPoke = (datas: { name: string, url: string }[]) => {
         setPokemons([]);
         datas.map(async (data) => {
-            fetch(data.url).then((res) => res.json())
+            Axios.get(data.url).then(res => res.data)
                 .then((res) => {
                     setPokemons((prevState) => {
                         state = [...prevState, res]
@@ -64,20 +71,23 @@ export default function Home({ PokeDatas }: PokeDatasProps) {
         })
     }
 
-    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
-        let filteredPoke = PokeDatas.filter((data) => { 
-            return data.name.includes(e.target.value.toLowerCase())
-        })
-        setPokeSource(filteredPoke)
-        setPageCount(Math.ceil(filteredPoke.length/30))
-        getPoke(filteredPoke.slice(offset, offset+ itemlength))
+    const filterPoke = (val: string) => {
+        let data = PokeDatas.filter((data) => data.name.includes(val.toLowerCase()))
+        return data
     }
 
-    const handlePageClick = (event: { selected: number }) => {
-        const offset = event.selected * 30;
-        getPoke(PokeSource.slice(offset, offset + itemlength))
-        console.log(event.selected);
+    const onInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPokeSource([])
+        setSearchParams({ "search": `${e.target.value}` });
+        let filteredPoke = filterPoke(e.target.value)
+        setPokeSource(filteredPoke)
+        setPageCount(Math.ceil(filteredPoke.length / 30))
+        setValue(e.target.value)
+    }
+
+    const handlePageClick = async (event: { selected: number }) => {
+        console.log("clicked")
+        setCurrentPage(event.selected)
     }
 
     if (loading) {
@@ -88,30 +98,34 @@ export default function Home({ PokeDatas }: PokeDatasProps) {
         <Center>
             <Flex flexDir={"column"} w="100%">
                 <Box mb="40px">
-                    <Input value={value} onChange={onInputChange}></Input>
+                    <Heading fontSize={"xl"}>Which pokemon do you want to search?</Heading>
+                    <Input value={value} onChange={onInputChange} placeholder="'Pikachu"></Input>
                 </Box>
                 <Heading>Pokédex</Heading>
-                {pokemons.length === 0?<Center>
-                        <Heading>Not found . . .</Heading>
-                    </Center>:
-                <>
-                    <DataCardsList datas={pokemons}></DataCardsList>
-                    <Center>
-                        <Box bgColor={"#FFF"} borderRadius={"10px"} m="20px" p="10px">
-                            <Center>
-                                <ReactPaginate className='paginate'
-                                    breakLabel="..."
-                                    nextLabel="Next >"
-                                    onPageChange={(e) => (handlePageClick(e))}
-                                    pageRangeDisplayed={3}
-                                    pageCount={pageCount}
-                                    previousLabel="< Previous"
-                                />
-                            </Center>
-                        </Box>
-                    </Center>
-                </>
-                }
+                <DataCardsList datas={pokemons}></DataCardsList>
+                <Center>
+                    <Box overflow={"hidden"} p="10px">
+                        <Center>
+                            <ReactPaginate className='paginate'
+                                breakLabel="..."
+                                nextLabel="Next >"
+                                onPageChange={handlePageClick}
+                                pageRangeDisplayed={3}
+                                marginPagesDisplayed={1}
+                                pageCount={pageCount}
+                                previousLabel="< Previous"
+                                forcePage={currentPage}
+                                pageClassName={"page-item"}
+                                pageLinkClassName={"page-link"}
+                                previousLinkClassName={"page-link"}
+                                previousClassName={"page-item"}
+                                nextLinkClassName={"page-link"}
+                                nextClassName={"page-item"}
+                                activeClassName={"active-item"}
+                            />
+                        </Center>
+                    </Box>
+                </Center>
             </Flex>
         </Center>
     )

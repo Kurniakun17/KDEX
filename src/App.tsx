@@ -1,8 +1,9 @@
 import { Box } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, redirect, Navigate} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import DetailedPoke from './pages/DetailedPoke'
+import Error404NotFound from './pages/Error404NotFound'
 import Home from './pages/Home'
 
 type pokeDatasProps = {
@@ -16,7 +17,6 @@ function App() {
 
   useEffect(()=>{
     fetchPoke('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0');
-    console.log("triggered")
   },[])
   
   async function fetchPoke(url: string) {
@@ -42,7 +42,9 @@ function App() {
       <main style={{padding:"12px"}}>
         <Routes>
           <Route path='/detailed/:name' element={<DetailedPoke/>}></Route>
-          <Route path='/' element={<Home PokeDatas={PokeDatas}></Home>}></Route>
+          <Route path='/home' element={<Home PokeDatas={PokeDatas}></Home>}></Route>
+          <Route path='/' element={<Navigate to={'/home'}/>}></Route>
+          <Route path="*" element={<Error404NotFound></Error404NotFound>}></Route>
         </Routes>
       </main>
     </Box>

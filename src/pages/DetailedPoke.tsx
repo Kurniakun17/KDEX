@@ -63,7 +63,7 @@ export default function DetailedPoke() {
 
 	return (
 		<Center color={"white"}> 
-			<Box className="detailedPokeContainer" bg={bgColor[data.types[0].type.name as keyof typeof bgColor]} minW={"80%"}  p={"1em"} color={bgColor[data.types[0].type.name as keyof typeof bgColor]} borderRadius="30px" bgImage={pokeballImage} bgRepeat={"no-repeat"}>
+			<Box className="detailedPokeContainer" bg={bgColor[data.types[0].type.name as keyof typeof bgColor]} minW={"80%"}  p={"1em"} color={bgColor[data.types[0].type.name as keyof typeof bgColor]} borderRadius="30px" bgImage={pokeballImage} bgPos={"-170% 0%"} bgSize={"500px"} bgRepeat={"no-repeat"}>
 				<Box bgColor={"#FFF"} display="inline-block" p="5px 15px" borderRadius={"6px"}>
 					<BubblyLink to="/" colorStart={bgColor[data.types[0].type.name as keyof typeof bgColor]} colorEnd="linear-gradient(90deg, rgba(111,103,252,1) 0%, rgba(43,82,78,1) 0%, rgba(35,97,110,1) 100%)">
 						Back

@@ -2,18 +2,29 @@
 
 *{
     font-family: "baloo 2", sans-serif;
-    animation: fade-in 1.5s;
+    /* animation: fade-in 1.5s; */
 }
 
 
 .paginate li{
     font-size: small;
     display: inline;
-    margin: 0px 0.3rem;
-    color: black;
+    font-size: large;
+    padding: 15px 20px;
 }
-.paginate :first-child, .paginate :last-child{
-    margin-left: 15px;
+
+.paginate{
+    padding: 10px 15px;
+    overflow: hidden;
+    /* margin: 10px; */
+    font-weight: bolder;
+    border-radius: 10px;
+    background-color: rgb(64,176,136);
+    border:solid 1px white;
+}
+
+.active-item{
+    background-color: black;
 }
 
 @keyframes fade-in{
