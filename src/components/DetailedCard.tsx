@@ -49,6 +49,9 @@ type speciesDataProps = {
     is_baby:boolean
     is_legendary:boolean
     is_mythical:boolean
+    evolution_chain:{
+        url:string
+    }
 }
 
 export default function DetailedCard({data}: DataProps) {
@@ -73,12 +76,6 @@ export default function DetailedCard({data}: DataProps) {
 
     if (loading) {
         return <Center>Loading . . .</Center>
-    }
-
-    if(data.sprites.other.home.front_default){
-        console.log("ada")
-    }else{
-        console.log("kosong")
     }
 
     return (

@@ -6,7 +6,6 @@ export default function DetailedNavbar() {
     <TabList fontWeight={"semibold"}>
         <Tab   fontWeight={"semibold"} fontSize={"xl"}>About</Tab>
         <Tab   fontWeight={"semibold"} fontSize={"xl"}>Base Stats</Tab>
-        <Tab   fontWeight={"semibold"} fontSize={"xl"}>Moves</Tab>
     </TabList>
   )
 }
