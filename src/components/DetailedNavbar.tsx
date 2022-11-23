@@ -3,9 +3,10 @@ import React from 'react'
 
 export default function DetailedNavbar() {
   return (
-    <TabList>
-        <Tab>About</Tab>
-        <Tab>Moves</Tab>
+    <TabList fontWeight={"semibold"}>
+        <Tab   fontWeight={"semibold"} fontSize={"xl"}>About</Tab>
+        <Tab   fontWeight={"semibold"} fontSize={"xl"}>Base Stats</Tab>
+        <Tab   fontWeight={"semibold"} fontSize={"xl"}>Moves</Tab>
     </TabList>
   )
 }

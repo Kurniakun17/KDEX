@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import {Routes, Route, redirect, Navigate} from 'react-router-dom'
 import Navbar from './components/Navbar'
+import About from './pages/About'
 import DetailedPoke from './pages/DetailedPoke'
 import Error404NotFound from './pages/Error404NotFound'
 import Home from './pages/Home'
@@ -43,6 +44,7 @@ function App() {
         <Routes>
           <Route path='/detailed/:name' element={<DetailedPoke/>}></Route>
           <Route path='/home' element={<Home PokeDatas={PokeDatas}></Home>}></Route>
+          <Route path='/about' element={<About></About>}></Route>
           <Route path='/' element={<Navigate to={'/home'}/>}></Route>
           <Route path="*" element={<Error404NotFound></Error404NotFound>}></Route>
         </Routes>

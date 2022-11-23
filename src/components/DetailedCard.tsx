@@ -2,34 +2,37 @@ import { Box, Center, Flex, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { upperCase } from '../utils'
 import DetailedTabs from './DetailedTabs'
-import Axios from 'Axios'
-import TypesCard from '../components/TypesCard'
+import Axios from 'axios'
+import unknownpokeball from '../assets/unknownpokeball.png'
 
 type DataProps = {
-    name: string
-    abilities: {
-        ability: {
-            name: string
-        }
-    }[]
-    sprites: {
-        other: {
-            home: {
-                front_default: string
+    data:{
+        name: string
+        abilities: {
+            ability: {
+                name: string
+            }
+        }[]
+        sprites: {
+            other: {
+                home: {
+                    front_default: string
+                }
             }
         }
-    }
-    types: {
-        type: {
-            name: string
+        types: {
+            type: {
+                name: string
+            }
+        }[]
+        weight: number
+        height:number
+        stats: {
+            base_stat: number
+        }[]
+        species: {
+            url: string
         }
-    }[]
-    weight: number
-    stats: {
-        base_stat: number
-    }[]
-    species: {
-        url: string
     }
 }
 
@@ -37,16 +40,25 @@ type speciesDataProps = {
     flavor_text_entries: {
         flavor_text: string
     }[]
+    habitat:{
+        name:string
+    }
+    color:{
+        name:string
+    }
+    is_baby:boolean
+    is_legendary:boolean
+    is_mythical:boolean
 }
 
-export default function DetailedCard({ name, abilities, sprites, types, weight, stats, species }: DataProps) {
+export default function DetailedCard({data}: DataProps) {
     const [formsData, setFormsData] = useState([]);
     const [speciesData, setSpeciesData] = useState<speciesDataProps>({} as speciesDataProps);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true)
-        Fetch(species.url)
+        Fetch(data.species.url)
     }, [])
 
     const Fetch = async (url: string) => {
@@ -63,20 +75,26 @@ export default function DetailedCard({ name, abilities, sprites, types, weight, 
         return <Center>Loading . . .</Center>
     }
 
+    if(data.sprites.other.home.front_default){
+        console.log("ada")
+    }else{
+        console.log("kosong")
+    }
+
     return (
         <Flex flexDir={"column"} alignItems={"center"} w="100%">
             <Box>
-                <Box w={"30vh"} mb="1em">
-                    <img src={sprites.other.home.front_default} alt="" />
+                <Box w={"30vh"} mb="1em" color={"black"}>
+                    <img src={data.sprites.other.home.front_default?data.sprites.other.home.front_default:unknownpokeball} alt={`${data.name}-image`} />
                 </Box>
             </Box>
             <Box bgColor={"#FFF"} borderRadius="10px" p="30px 10px" w="100%">
                 <Box textAlign={"center"} p="0em 1em">
                     <Box>
-                        <Heading>{upperCase(name)}</Heading>
-                        <Text m={"10px"}>"{speciesData.flavor_text_entries[0].flavor_text}"</Text>
+                        <Heading>{upperCase(data.name)}</Heading>
+                        <Text fontStyle={"italic"}  m={"10px"}>"{speciesData.flavor_text_entries[0].flavor_text}"</Text>
                     </Box>
-                    <DetailedTabs stats={stats} abilities={abilities} types={types} weight={weight} ></DetailedTabs>
+                    <DetailedTabs data={data} speciesData={speciesData}></DetailedTabs>
                 </Box>
             </Box>
         </Flex>

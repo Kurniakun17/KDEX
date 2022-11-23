@@ -11,13 +11,12 @@ type TypesProps = {
 }
 
 export default function TypesCard({ types }: TypesProps) {
-
     return (
         <>
             {types.map((type, index) => {
                 upperCase(type.type.name);
-                return (<Box key={`${index}-${name}"`} borderRadius={"5px"} bgColor="white" color={`${bgColor[types[0].type.name as keyof typeof bgColor]}`}>
-                    <Text p={"0 7px"} fontSize="lg" fontWeight={"sm"}>{upperCase(type.type.name)}</Text>
+                return (<Box key={`${index}"`} borderRadius={"5px"} bgColor="white" color={`${bgColor[type.type.name as keyof typeof bgColor]}`} fontWeight="semibold">
+                    <Text p={"0 7px"} fontWeight={"sm"}>{upperCase(type.type.name)}</Text>
                 </Box>);
             })}
         </>

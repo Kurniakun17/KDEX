@@ -16,15 +16,13 @@
 .paginate{
     padding: 10px 15px;
     overflow: hidden;
-    /* margin: 10px; */
     font-weight: bolder;
     border-radius: 10px;
     background-color: rgb(64,176,136);
-    border:solid 1px white;
 }
 
 .active-item{
-    background-color: black;
+    background-color: rgb(100,147,235);
 }
 
 @keyframes fade-in{

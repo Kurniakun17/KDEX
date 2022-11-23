@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import DataCardsList from '../components/DataCardsList'
-import Axios from 'Axios';
+import Axios from 'axios';
 
 type PokeDatasProps = {
     PokeDatas: {
@@ -97,7 +97,7 @@ export default function Home({ PokeDatas }: PokeDatasProps) {
         <Center>
             <Flex flexDir={"column"} w="100%">
                 <Box mb="40px">
-                    <Heading fontSize={"xl"}>Which pokemon do you want to search?</Heading>
+                    <Heading fontSize={"xl"} mb={"1rem"}>Which pokemon do you want to search?</Heading>
                     <Input value={value} onChange={onInputChange} placeholder="'Pikachu"></Input>
                 </Box>
                 <Heading>Pokédex</Heading>
