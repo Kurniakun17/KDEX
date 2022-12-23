@@ -75,7 +75,7 @@ export default function DataCard({
                                     justifyContent={"space-between"}
                                     m="0.2rem"
                                     gap="0.4rem"
-                                    fontSize={"md"}
+                                    fontSize={`"md"`}
                                 >
                                     <TypesCard types={types}></TypesCard>
                                 </Flex>
