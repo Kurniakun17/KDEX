@@ -1,5 +1,4 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
-import React from 'react'
 import { BubblyLink } from 'react-bubbly-transitions'
 import { Link } from 'react-router-dom'
 

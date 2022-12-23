@@ -1,9 +1,7 @@
 import { Box, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { BubblyLink } from "react-bubbly-transitions";
 import { bgColor, bgImg, upperCase } from "../utils/index";
 import TypesCard from "./TypesCard";
-import pokeball from "../assets/pokeball.png"
 import unknownpokeball from "../assets/unknownpokeball.png";
 
 type DataCardProps = {

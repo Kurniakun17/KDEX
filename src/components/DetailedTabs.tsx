@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import Axios from 'axios'
 import {
     Tabs,
     TabPanels,
@@ -7,14 +5,12 @@ import {
     Text,
     Flex,
     Box,
-    Center,
     Heading,
     Grid,
 } from "@chakra-ui/react";
 import DetailedNavbar from "./DetailedNavbar";
 import { Progress } from "@chakra-ui/react";
 import {upperCase} from '../utils/index'
-import DetailedEvo from "./DetailedEvo";
 
 type DetailedTabsProps = {
     data: {
@@ -51,7 +47,6 @@ type DetailedTabsProps = {
 };
 
 export default function DetailedTabs({ data, speciesData }: DetailedTabsProps) {
-
     let status = ""
     if(speciesData.is_baby){
         status="Baby Pokémon"

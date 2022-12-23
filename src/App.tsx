@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import {Routes, Route, redirect, Navigate} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import About from './pages/About'
 import DetailedPoke from './pages/DetailedPoke'

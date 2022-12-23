@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
-import DataCard from "./DataCard";
 
 type speciesDataProps={
     speciesData:{

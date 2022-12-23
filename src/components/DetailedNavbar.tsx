@@ -1,5 +1,4 @@
-import { Box, Flex, Tabs, Tab, TabList, TabPanels, TabPanel } from '@chakra-ui/react'
-import React from 'react'
+import {Tab, TabList} from '@chakra-ui/react'
 
 export default function DetailedNavbar() {
   return (

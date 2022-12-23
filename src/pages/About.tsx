@@ -1,9 +1,7 @@
 import { Box, Heading, Flex, Img, Center } from "@chakra-ui/react";
-import React from "react";
 import react from '../assets/react.png'
 import typescript from '../assets/typescript.png'
 import chakra from '../assets/chakra.png'
-import { Link } from "react-router-dom";
 
 export default function About() {
     return (

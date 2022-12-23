@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Grid } from "@chakra-ui/react";
+import { Center, Grid } from "@chakra-ui/react";
 import DataCard from "./DataCard";
 // import {bgColor} from '../utils/index';
 
