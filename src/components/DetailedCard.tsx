@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { upperCase } from '../utils'
 import DetailedTabs from './DetailedTabs'
 import Axios from 'axios'
-import unknownpokeball from '../assets/UnknownPokeBall.png'
+import unknownpokeball from '../assets/unknownpokeball.png'
 
 type DataProps = {
     data:{
