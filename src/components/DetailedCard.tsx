@@ -55,7 +55,6 @@ type speciesDataProps = {
 }
 
 export default function DetailedCard({data}: DataProps) {
-    const [formsData, setFormsData] = useState([]);
     const [speciesData, setSpeciesData] = useState<speciesDataProps>({} as speciesDataProps);
     const [loading, setLoading] = useState(true);
 
