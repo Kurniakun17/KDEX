@@ -2,7 +2,7 @@ import { Box, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { BubblyLink } from "react-bubbly-transitions";
 import { bgColor, bgImg, upperCase } from "../utils/index";
 import TypesCard from "./TypesCard";
-import unknownpokeball from "../assets/unknownpokeball.png";
+import unknownpokeball from '../assets/unknownpokeball.png'
 
 type DataCardProps = {
     name: string;
