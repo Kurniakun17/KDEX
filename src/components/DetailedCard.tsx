@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { upperCase } from '../utils'
 import DetailedTabs from './DetailedTabs'
 import Axios from 'axios'
-import unknownpokeball from 'src/assets/unknownpokeball.png'
+
 
 type DataProps = {
     data:{
@@ -81,7 +81,7 @@ export default function DetailedCard({data}: DataProps) {
         <Flex flexDir={"column"} alignItems={"center"} w="100%">
             <Box>
                 <Box w={"30vh"} mb="1em" color={"black"}>
-                    <img src={data.sprites.other.home.front_default?data.sprites.other.home.front_default:unknownpokeball} alt={`${data.name}-image`} />
+                    <img src={data.sprites.other.home.front_default?data.sprites.other.home.front_default:'/assets/unknownpokeball.png'} alt={`${data.name}-image`} />
                 </Box>
             </Box>
             <Box bgColor={"#FFF"} borderRadius="10px" p="30px 10px" w="100%">

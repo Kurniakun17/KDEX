@@ -2,7 +2,6 @@ import { Box, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { BubblyLink } from "react-bubbly-transitions";
 import { bgColor, bgImg, upperCase } from "../utils/index";
 import TypesCard from "./TypesCard";
-import unknownpokeball from '../assets/unknownpokeball.png'
 
 type DataCardProps = {
     name: string;
@@ -55,7 +54,7 @@ export default function DataCard({
                         <Flex flexDir={"column"} bgRepeat={"no-repeat"}>
                             <Center>
                                 <Image
-                                    src={sprite ? sprite : unknownpokeball}
+                                    src={sprite ? sprite : '/assets/unknownpokeball.png'}
                                     alt="pokemon-image"
                                     w={"100px"}
                                     h="100px"

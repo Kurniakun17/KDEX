@@ -1,42 +1,24 @@
 import { extendTheme } from "@chakra-ui/react"
-import bugImg from '../assets/bug.svg';
-import darkImg from '../assets/dark.svg';
-import dragonImg from '../assets/dragon.svg';
-import electricImg from '../assets/electric.svg';
-import fairyImg from '../assets/fairy.svg';
-import fightingImg from '../assets/fighting.svg';
-import fireImg from '../assets/fire.svg';
-import flyingImg from '../assets/flying.svg';
-import ghostImg from '../assets/ghost.svg';
-import grassImg from '../assets/grass.svg';
-import groundImg from '../assets/ground.svg';
-import iceImg from '../assets/ice.svg';
-import normalImg from '../assets/normal.svg';
-import poisonImg from '../assets/poison.svg';
-import psychicImg from '../assets/psychic.svg';
-import rockImg from '../assets/rock.svg';
-import steelImg from '../assets/steel.svg';
-import waterImg from '../assets/water.svg';
 
 export const bgImg={
-    "rock" : rockImg,
-    "ghost" : ghostImg,
-    "steel" : steelImg,
-    "water" : waterImg,
-    "grass" : grassImg,
-    "psychic" : psychicImg,
-    "ice": iceImg,
-    "dark" : darkImg,
-    "fairy" : fairyImg,
-    "normal" : normalImg,
-    "fighting" : fightingImg,
-    "flying" : flyingImg,
-    "poison" : poisonImg,
-    "ground" : groundImg,
-    "bug" : bugImg,
-    "fire" : fireImg,
-    "electric" : electricImg,
-    "dragon" : dragonImg,
+    "rock" : '/assets/rock.svg',
+    "ghost" : '/assets/ghost.svg',
+    "steel" : '/assets/steel.svg',
+    "water" : '/assets/water.svg',
+    "grass" : '/assets/grass.svg',
+    "psychic" : '/assets/psychic.svg',
+    "ice": '/assets/ice.svg',
+    "dark" : '/assets/dark.svg',
+    "fairy" : '/assets/fairy.svg',
+    "normal" : '/assets/normal.svg',
+    "fighting" : '/assets/fighting.svg',
+    "flying" : '/assets/flying.svg',
+    "poison" : '/assets/poison.svg',
+    "ground" : '/assets/ground.svg',
+    "bug" : '/assets/bug.svg',
+    "fire" : '/assets/fire.svg',
+    "electric" : '/assets/electric.svg',
+    "dragon" : '/assets/dragon.svg',
 }
 
 export const bgColor={

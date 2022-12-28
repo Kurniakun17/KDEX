@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BubblyLink } from "react-bubbly-transitions";
 import DetailedCard from "../components/DetailedCard";
-import pokeballImage from "../assets/pokeball.png";
 import { bgColor, upperCase } from "../utils/index";
 
 type DataProps = {
@@ -91,7 +90,7 @@ export default function DetailedPoke() {
                 p={"1em"}
                 color={bgColor[data.types[0].type.name as keyof typeof bgColor]}
                 borderRadius="30px"
-                bgImage={pokeballImage}
+                bgImage={"/assets/pokeball.png"}
                 bgPos="top left -20%"
                 bgSize={"500px"}
                 bgRepeat={"no-repeat"}

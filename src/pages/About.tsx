@@ -1,7 +1,4 @@
 import { Box, Heading, Flex, Img, Center } from "@chakra-ui/react";
-import react from '../assets/react.png'
-import typescript from '../assets/typescript.png'
-import chakra from '../assets/chakra.png'
 
 export default function About() {
     return (
@@ -11,9 +8,9 @@ export default function About() {
             </Center>
             <Center>
                 <Flex gap={"50px"} mt="20px">
-                    <Img src={react} w="110px" h="100px"></Img>
-                    <Img src={typescript} w="100px" h="100px"></Img>
-                    <Img src={chakra} w="100px" h="100px" borderRadius={"10px"}></Img>
+                    <Img src={'/assets/react.png'} w="110px" h="100px"></Img>
+                    <Img src={'/assets/typescript.png'} w="100px" h="100px"></Img>
+                    <Img src={'/assets/chakra.png'} w="100px" h="100px" borderRadius={"10px"}></Img>
                 </Flex>
             </Center>
         </Box>
